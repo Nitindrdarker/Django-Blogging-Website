@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Create a new blog post {% endblock%}
+{% block content %}
+{% if user.is_authenticated %}
+
+    <h1>Add blog post</h1>
+    <br>
+    <br>
+    <div class="container">
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data"><!--enctype for taking image-->
+        {% csrf_token %}
+        {{ form.media }} <!--this here to show the rich text editor on the page-->
+        {{ form.as_p }}
+        <button class="btn btn-secondary">Post</button>
+    </form></div></div>
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById('user_name').value = name;
+    </script>
+    {% else %}
+You are not logged in !
+{% endif %}
+{% endblock %}

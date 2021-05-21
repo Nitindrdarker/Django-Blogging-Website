@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} Edit post {% endblock%}
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == post.author.id %}
+    <h1>Update post</h1>
+    <br>
+    <br>
+    <div class="container">
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}
+        {{form.media}}<!---to make rich text editor work-->
+        {{ form.as_p }}
+        <button class="btn btn-secondary">Update</button>
+    </form></div></div>
+    {% else %}
+    You are not logged in !
+    {% endif %}
+{% else %}
+You are not logged in !
+{% endif %}
+{% endblock %}

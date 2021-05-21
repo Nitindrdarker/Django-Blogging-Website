@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Create a new blog post {% endblock%}
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == profile.user.id %}
+    <h1>Edit Profile Page</h1>
+    <br>
+    <br>
+    <div class="container">
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data"><!--enctype for taking image-->
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-secondary">Update</button>
+    </form></div></div>
+    {% else %}
+    <p>Not correct user</p>
+    {% endif %}
+    {% else %}
+You are not logged in !
+{% endif %}
+{% endblock %}
